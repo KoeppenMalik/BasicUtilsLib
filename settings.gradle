@@ -1,0 +1,3 @@
+include ':BasicUtilsLib'
+include ':app'
+rootProject.name = "BasicUtils"
