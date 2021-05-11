@@ -7,10 +7,21 @@ import androidx.fragment.app.Fragment;
 
 public class UtilsLib {
 
-    public static int NO_ANIM = -1;
+    /**
+     * a int used to pass into methods to tell that there is no animation wanted
+     */
+    public static final int NO_ANIM = -1;
 
+    /**
+     * a field used to handle processes
+     */
     private AppCompatActivity activity;
 
+    /**
+     * uses passed <code>activity</code> to convert it into a field. It is used to handle processes
+     * @param activity a class that is extending <code>AppCompatActivity</code>. Normally it is the
+     *                 MainActivity
+     */
     public UtilsLib(AppCompatActivity activity) {
         this.activity = activity;
     }
@@ -32,7 +43,13 @@ public class UtilsLib {
         return false;
     }
 
-    public void replaceFragment(int containerViewId, Fragment newFragment, @AnimRes @AnimatorRes int anim) {
+    /**
+     * replaces the View <code>containerViewId</code> with <code>newFragment</code>
+     * @param containerViewId the id of the view which will be replaced
+     * @param newFragment the fragment which will be set to the place of the View
+     * @param anim the animation with which the new fragment will be placed
+     */
+    public void replaceView(int containerViewId, Fragment newFragment, @AnimRes @AnimatorRes int anim) {
         if (anim == NO_ANIM)
             activity.getSupportFragmentManager().beginTransaction().replace(containerViewId, newFragment).commit();
         else

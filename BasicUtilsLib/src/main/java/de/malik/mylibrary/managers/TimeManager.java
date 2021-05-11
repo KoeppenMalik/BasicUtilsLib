@@ -12,17 +12,51 @@ import java.util.TimeZone;
 
 public class TimeManager {
 
+    /**
+     * the separator of a time. For example 12<underlined>:</underlined>20 Uhr
+     */
     public static final String DEFAULT_TIME_SEPARATOR = ":";
+
+    /**
+     * the format in which the dates will be shown. For example 11.05.2021
+     */
     public static final String DEFAULT_DATE_FORMAT = "dd.MM.yyyy";
+
+    /**
+     * the format in which the times will be shown. For example 1:15:16
+     */
     public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
+
+    /**
+     * the suffix which will be used for times. For example 12:20 <underlined>Uhr</underlined>
+     */
     public static final String DEFAULT_TIME_SUFFIX = " Uhr";
+
+    /**
+     * an Array containing all the week days starting with "Montag" and ending with "Sonntag"
+     */
     public static final String[] WEEK_DAYS = new String[] {
             "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"
     };
 
+    /**
+     * the conversion factor from milliseconds to days
+     */
     private static final int DAYS = 86400000;
+
+    /**
+     * the conversion factor from milliseconds to hours
+     */
     public static final int HOURS = 3600000;
+
+    /**
+     * the conversion factor from milliseconds to minutes
+     */
     public static final int MINUTES = 60000;
+
+    /**
+     * the conversion factor from milliseconds to seconds
+     */
     public static final int SECONDS = 1000;
 
     public static String default_time_separator = DEFAULT_TIME_SEPARATOR;
@@ -136,9 +170,5 @@ public class TimeManager {
      */
     public static long diff(@NonNull Date d1, @NonNull Date d2) {
         return d1.getTime() - d2.getTime();
-    }
-
-    public static TimeManager getInstance() {
-        return new TimeManager();
     }
 }
