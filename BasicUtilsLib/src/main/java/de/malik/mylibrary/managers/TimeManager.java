@@ -18,6 +18,11 @@ public class TimeManager {
     public static final String DEFAULT_TIME_SEPARATOR = ":";
 
     /**
+     * the separator of a date. For example 12<underlined>.</underlined>05<underlined>.</underlined>2021
+     */
+    public static final String DEFAULT_DATE_SEPARATOR = ".";
+
+    /**
      * the format in which the dates will be shown. For example 11.05.2021
      */
     public static final String DEFAULT_DATE_FORMAT = "dd.MM.yyyy";
@@ -60,6 +65,7 @@ public class TimeManager {
     public static final int SECONDS = 1000;
 
     public static String default_time_separator = DEFAULT_TIME_SEPARATOR;
+    public static String default_date_separator = DEFAULT_DATE_SEPARATOR;
     public static String default_date_format = DEFAULT_DATE_FORMAT;
     public static String default_time_suffix = DEFAULT_TIME_SUFFIX;
 
@@ -74,6 +80,55 @@ public class TimeManager {
         long minutes = Integer.parseInt(parts[1]);
         long seconds = Integer.parseInt(parts[2]);
         return new long[] {hours, minutes, seconds};
+    }
+
+    /**
+     * creates a formatted date String. For example: day = 1, month = 5, year = 2021 will be
+     * converted to a String:
+     * 01<code>default_time_separator</code>05<code>default_time_separator</code>2021.
+     * @param day the day of the date
+     * @param month the month of the date
+     * @param year the year of the date
+     * @return a formatted date String
+     */
+    public static String formatDate(int day, int month, int year) {
+        String dayString = day + "", monthString = month + "";
+        if (day < 10) {
+            dayString = "0" + dayString;
+        }
+        if (month < 10) {
+            monthString = "0" + monthString;
+        }
+        return dayString + default_date_separator + monthString + default_date_separator + year;
+    }
+
+    /**
+     * creates a formatted date String. For example: a date String
+     * 2<code>default_time_separator</code>5<code>default_time_separator</code>2021 will be
+     * converted to 02.05.2021.
+     * @param dateString the date String which will be formatted
+     * @return a formatted date String
+     */
+    public static String formatDateString(String dateString) {
+        int[] parts = dateParts(dateString);
+        String day = parts[0] + "", month = parts[1] + "";
+        if (parts[0] < 10) {
+            day = "0" + day;
+        }
+        if (parts[1] < 10) {
+            month = "0" + month;
+        }
+        return day + default_date_separator + month + default_date_separator + parts[2];
+    }
+
+    /**
+     * divides the date String into its parts. for example 12.05.2021 will be split into 12, 5 and 2021
+     * @param dateString the date String which will be split
+     * @return a date String divided into its parts
+     */
+    public static int[] dateParts(String dateString) {
+        String[] parts = dateString.split(default_date_separator);
+        return new int[] {Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2])};
     }
 
     /**
@@ -110,7 +165,7 @@ public class TimeManager {
         df.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
         c.setFirstDayOfWeek(Calendar.MONDAY);
         c.setTime(df.parse(dateString));
-        return c.get(Calendar.DAY_OF_WEEK) -1;
+        return c.get(Calendar.DAY_OF_WEEK);
     }
 
     /**
