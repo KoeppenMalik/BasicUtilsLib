@@ -70,6 +70,15 @@ public class TimeManager {
     public static String default_time_suffix = DEFAULT_TIME_SUFFIX;
 
     /**
+     * cuts off the default time suffix from the formatted time string
+     * @param formattedTimeString the formatted time string which will be changed
+     * @return a default time string
+     */
+    public static String cutOffTimeSuffix(String formattedTimeString) {
+        return formattedTimeString.split(" ")[0];
+    }
+
+    /**
      * creates an array of long containing: 0 = hours; 1 = minutes; 2 = seconds.
      * @param timeString the time String which will be separated
      * @return an array of long with all the parts of the time String
@@ -80,6 +89,15 @@ public class TimeManager {
         long minutes = Integer.parseInt(parts[1]);
         long seconds = Integer.parseInt(parts[2]);
         return new long[] {hours, minutes, seconds};
+    }
+
+    /**
+     * formats the time string by adding the default time suffix
+     * @param timeString the time string which will be formatted
+     * @return a formatted time string
+     */
+    public static String formatTimeString(String timeString) {
+        return timeString + default_time_suffix;
     }
 
     /**
@@ -104,8 +122,7 @@ public class TimeManager {
 
     /**
      * creates a formatted date String. For example: a date String
-     * 2<code>default_time_separator</code>5<code>default_time_separator</code>2021 will be
-     * converted to 02.05.2021.
+     * 2.5.2021 will be converted to 02.05.2021.
      * @param dateString the date String which will be formatted
      * @return a formatted date String
      */
@@ -195,6 +212,17 @@ public class TimeManager {
         long minutes = millis % DAYS % HOURS / MINUTES;
         long seconds = millis % DAYS % HOURS % MINUTES / SECONDS;
         return formatValues(hours, minutes, seconds, includeSeconds);
+    }
+
+    /**
+     * converts the given day, month and year to a date String
+     * @param day the day of the date
+     * @param month the month of the date
+     * @param year the year of the date
+     * @return a date String in the format: day.month.year; It will be formatted with the {@link #formatDateString} method
+     */
+    public static String toDateString(int day, int month, int year) {
+        return formatDateString(day + default_date_separator + month + default_date_separator + year);
     }
 
     /**

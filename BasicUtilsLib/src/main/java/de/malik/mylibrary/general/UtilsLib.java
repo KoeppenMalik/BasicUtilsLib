@@ -5,6 +5,9 @@ import androidx.annotation.AnimatorRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class UtilsLib {
 
     /**
@@ -54,5 +57,10 @@ public class UtilsLib {
             activity.getSupportFragmentManager().beginTransaction().replace(containerViewId, newFragment).commit();
         else
             activity.getSupportFragmentManager().beginTransaction().setCustomAnimations(anim, 0).replace(containerViewId, newFragment).commit();
+    }
+
+    public long createHighestId(ArrayList<Long> ids) {
+        if (ids.size() == 0) return 1;
+        return Collections.max(ids) +1;
     }
 }
