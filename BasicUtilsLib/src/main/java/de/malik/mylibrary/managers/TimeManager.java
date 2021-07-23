@@ -198,7 +198,9 @@ public class TimeManager {
         long[] timeParts = timeParts(timeString);
         long hoursMillis = timeParts[0] * HOURS;
         long minutesMillis = timeParts[1] * MINUTES;
-        long secondsMillis = timeParts[2] * SECONDS;
+        long secondsMillis = 0;
+        if (timeParts.length > 2)
+            secondsMillis = timeParts[2] * SECONDS;
         return hoursMillis + minutesMillis + secondsMillis;
     }
 
