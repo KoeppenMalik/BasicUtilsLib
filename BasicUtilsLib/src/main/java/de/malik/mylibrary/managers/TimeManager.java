@@ -71,11 +71,15 @@ public class TimeManager {
 
     /**
      * cuts off the default time suffix from the formatted time string
-     * @param formattedTimeString the formatted time string which will be changed
+     * @param formattedTimeStrings the formatted time strings which will be changed
      * @return a default time string
      */
-    public static String cutOffTimeSuffix(String formattedTimeString) {
-        return formattedTimeString.split(" ")[0];
+    public static String[] cutOffTimeSuffix(String... formattedTimeStrings) {
+        String[] results = new String[formattedTimeStrings.length];
+        for (int i = 0; i < formattedTimeStrings.length; i++) {
+            results[i] = formattedTimeStrings[i].split(" ")[0];
+        }
+        return results;
     }
 
     /**
@@ -196,6 +200,15 @@ public class TimeManager {
         long minutesMillis = timeParts[1] * MINUTES;
         long secondsMillis = timeParts[2] * SECONDS;
         return hoursMillis + minutesMillis + secondsMillis;
+    }
+
+    /**
+     * converts the time argument to milliseconds
+     * @param hours the time in hours which will be converted into milliseconds
+     * @return the time argument in milliseconds
+     */
+    public static long hoursToMillis(int hours) {
+        return hours *60 *60 *1000;
     }
 
     /**
