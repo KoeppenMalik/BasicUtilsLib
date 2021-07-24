@@ -91,7 +91,9 @@ public class TimeManager {
         String[] parts = timeString.split(default_time_separator);
         long hours = Integer.parseInt(parts[0]);
         long minutes = Integer.parseInt(parts[1]);
-        long seconds = Integer.parseInt(parts[2]);
+        long seconds = 0;
+        if (parts.length > 2)
+            seconds = Integer.parseInt(parts[2]);
         return new long[] {hours, minutes, seconds};
     }
 
@@ -199,7 +201,7 @@ public class TimeManager {
         long hoursMillis = timeParts[0] * HOURS;
         long minutesMillis = timeParts[1] * MINUTES;
         long secondsMillis = 0;
-        if (timeParts.length > 2)
+        if (timeParts.length == 3)
             secondsMillis = timeParts[2] * SECONDS;
         return hoursMillis + minutesMillis + secondsMillis;
     }
