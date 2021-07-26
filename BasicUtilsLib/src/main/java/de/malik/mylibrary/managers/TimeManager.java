@@ -211,7 +211,7 @@ public class TimeManager {
      * @param hours the time in hours which will be converted into milliseconds
      * @return the time argument in milliseconds
      */
-    public static long hoursToMillis(int hours) {
+    public static double hoursToMillis(double hours) {
         return hours *60 *60 *1000;
     }
 
