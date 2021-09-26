@@ -1,5 +1,7 @@
 package de.malik.mylibrary.managers;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import java.text.DateFormat;
@@ -254,6 +256,10 @@ public class TimeManager {
      */
     private static String formatValues(long hours, long minutes, long seconds, boolean includeSeconds) {
         String hoursString = "" + hours, minutesString = "" + minutes, secondsString = "" + seconds;
+        Log.i("TAG", minutes + "");
+        if (hours < 10) hoursString = "0" + hours;
+        if (minutes < 10) minutesString = "0" + minutes;
+        if (seconds < 10) secondsString = "0" + seconds;
         if (default_time_separator == null || default_time_separator.equals(""))
             default_time_separator = DEFAULT_TIME_SEPARATOR;
         if (includeSeconds)
