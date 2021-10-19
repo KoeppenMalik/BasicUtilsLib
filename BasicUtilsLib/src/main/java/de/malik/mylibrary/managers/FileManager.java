@@ -66,7 +66,7 @@ public class FileManager {
             throw new IllegalArgumentException("The folderName can not contain any of the chars " + RESERVED_CHARS_STRING);
         }
         File folder = new File(folderPath, folderName);
-        if (!folder.mkdir()) {
+        if (!folder.exists()) {
             folder.mkdir();
         }
         CREATED_FOLDERS.put(folderName, folder);
