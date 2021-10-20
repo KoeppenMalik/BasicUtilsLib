@@ -17,14 +17,14 @@ public class FileManager {
     /**
      * an Array containing all Strings that are not allowed in file or folder names
      */
-    public static final String[] RESERVED_CHARS = new String[] {
-            "|", "\\\\", "?", "'", "*", "<", "\\", "\"", ":", ">", "+", "[", "]", "/"
+    public static final char[] RESERVED_CHARS = new char[] {
+            '|', '?', ',', '/', '*', '<', '\\', '\"', ':', '>', '+', '[', ']', '/'
     };
 
     /**
      * one single String containing all Strings that are not allowed in file or folder names
      */
-    public static final String RESERVED_CHARS_STRING = "|\\\\?*<\\\":>+[]/'";
+    public static final String RESERVED_CHARS_STRING = "|?*<\\,\":>+[]/'";
 
     /**
      * a HashMap containing all created files. They can be accessed by using the whole file name
@@ -45,7 +45,7 @@ public class FileManager {
      * @throws IOException if an I/O error occurred
      */
     public static File createFile(@NonNull String fileName, @NonNull File folder) throws IOException {
-        if (UtilsLib.containsString(fileName, RESERVED_CHARS) || UtilsLib.containsString(folder.getName(), RESERVED_CHARS)) {
+        if (UtilsLib.containsChar(fileName, RESERVED_CHARS) || UtilsLib.containsChar(folder.getName(), RESERVED_CHARS)) {
             throw new IllegalArgumentException("Ether the fileName or the folder name can not contain any of the chars " + RESERVED_CHARS_STRING);
         }
         File file = new File(folder, fileName);
@@ -62,7 +62,7 @@ public class FileManager {
      * @return the folder which just have been created
      */
     public static File createFolder(@NonNull String folderName, @Nullable String folderPath) {
-        if (UtilsLib.containsString(folderName, RESERVED_CHARS)) {
+        if (UtilsLib.containsChar(folderName, RESERVED_CHARS)) {
             throw new IllegalArgumentException("The folderName can not contain any of the chars " + RESERVED_CHARS_STRING);
         }
         File folder = new File(folderPath, folderName);
