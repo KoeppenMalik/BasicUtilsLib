@@ -44,14 +44,14 @@ public class FileManager {
      * @return the file which just have been created
      * @throws IOException if an I/O error occurred
      */
-    public static File createFile(@NonNull String fileName, @NonNull File folder) throws IOException {
+    public static boolean createFile(@NonNull String fileName, @NonNull File folder) throws IOException {
         if (UtilsLib.containsChar(fileName, RESERVED_CHARS) || UtilsLib.containsChar(folder.getName(), RESERVED_CHARS)) {
             throw new IllegalArgumentException("Ether the fileName or the folder name can not contain any of the chars " + RESERVED_CHARS_STRING);
         }
         File file = new File(folder, fileName);
-        file.createNewFile();
+        boolean created = file.createNewFile();
         CREATED_FILES.put(fileName, file);
-        return file;
+        return created;
     }
 
     /**
@@ -61,16 +61,17 @@ public class FileManager {
      * @param folderPath the path at which the folder will be created
      * @return the folder which just have been created
      */
-    public static File createFolder(@NonNull String folderName, @Nullable String folderPath) {
+    public static boolean createFolder(@NonNull String folderName, @Nullable String folderPath) {
         if (UtilsLib.containsChar(folderName, RESERVED_CHARS)) {
             throw new IllegalArgumentException("The folderName can not contain any of the chars " + RESERVED_CHARS_STRING);
         }
         File folder = new File(folderPath, folderName);
+        boolean created = false;
         if (!folder.exists()) {
-            folder.mkdir();
+            created = folder.mkdir();
         }
         CREATED_FOLDERS.put(folderName, folder);
-        return folder;
+        return created;
     }
 
     /**
